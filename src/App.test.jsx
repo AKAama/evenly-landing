@@ -19,14 +19,16 @@ test("renders the home route", () => {
   renderPath("/");
 
   expect(
-    screen.getByRole("heading", { name: "把共同消费变成一本清楚的账" })
+    screen.getByRole("heading", {
+      name: "Turn shared spending intobite-sized clarity.",
+    })
   ).toBeInTheDocument();
-  expect(screen.getByText(/Stella、Tristan、Sylvia/)).toBeInTheDocument();
+  expect(screen.getByText(/把聚餐、旅行、合租和日常代买/)).toBeInTheDocument();
   expect(
-    screen.getByRole("heading", { name: "适合每一种共同消费" })
+    screen.getByRole("heading", { name: "Build a calmer money habit" })
   ).toBeInTheDocument();
   expect(
-    screen.getByRole("heading", { name: "从记录到结清，都清楚一点" })
+    screen.getByRole("heading", { name: "记录、确认、分摊、结清。" })
   ).toBeInTheDocument();
   expect(screen.getByRole("heading", { name: "常见问题" })).toBeInTheDocument();
 });
@@ -84,9 +86,9 @@ test("renders the download route", () => {
 });
 
 describe("download CTA", () => {
-  it("shows TestFlight wording on the homepage", () => {
+  it("shows App Store wording on the homepage", () => {
     renderPath("/");
-    const link = screen.getByRole("link", { name: /加入 TestFlight 测试/ });
+    const link = screen.getByRole("link", { name: "Download on the App Store" });
 
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute("href", "/download");

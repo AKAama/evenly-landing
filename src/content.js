@@ -1,23 +1,23 @@
 import { siteConfig } from "./config";
 
 export const navLinks = [
-  { href: "/privacy", label: "隐私政策" },
-  { href: "/terms", label: "服务条款" },
-  { href: "/support", label: "支持" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+  { href: "/support", label: "Support" },
 ];
 
 export const useCases = [
   {
-    title: "聚餐",
-    body: "记录每个人点了什么、谁先垫付，让饭后分账更清楚。",
+    title: "Ledger",
+    body: "Read a clean shared ledger that summarises every expense from any trip, dinner, or home.",
   },
   {
-    title: "旅行",
-    body: "把住宿、交通、门票和日常开销放进同一本账，旅途中也能随时对齐。",
+    title: "Settlement",
+    body: "Turn many payments into a few simple transfers, without reopening the group chat.",
   },
   {
-    title: "合租与日常",
-    body: "管理房租、水电、日用品和零散代买，减少反复算账的麻烦。",
+    title: "Reminders",
+    body: "Keep shared expenses moving with gentle prompts when a book needs attention.",
   },
 ];
 
@@ -64,5 +64,23 @@ export const faqs = [
   {
     question: "之后会上架 App Store 吗？",
     answer: "计划会在准备就绪后上架 App Store，具体时间会根据测试反馈和审核进度更新。",
+  },
+];
+
+export const testimonials = [
+  {
+    quote: "终于不用在群聊里翻谁付了什么。它很轻，但账目一下就清楚了。",
+    name: "Stacey M.",
+    role: "Early beta user",
+  },
+  {
+    quote: "旅行结束后结算很快，Evenly 把几笔复杂垫付整理成了两次转账。",
+    name: "Daniel L.",
+    role: "Early beta user",
+  },
+  {
+    quote: "合租买东西以前总是忘，现在每个人确认一下就行，少了很多尴尬。",
+    name: "Alex R.",
+    role: "Early beta user",
   },
 ];

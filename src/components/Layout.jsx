@@ -2,10 +2,10 @@ import { siteConfig } from "../config";
 import { navLinks } from "../content";
 import CTAButton from "./CTAButton";
 
-export default function Layout({ children, compact = false }) {
+export default function Layout({ children, compact = false, minimal = false }) {
   return (
-    <div className="site-shell">
-      <header className="site-header">
+    <div className={`site-shell ${minimal ? "site-shell-minimal" : ""}`.trim()}>
+      {!minimal && <header className="site-header">
         <a className="brand" href="/" aria-label="Evenly 首页">
           <span className="brand-mark">=</span>
           <span>Evenly</span>
@@ -18,7 +18,7 @@ export default function Layout({ children, compact = false }) {
           ))}
         </nav>
         {!compact && <CTAButton className="header-cta">TestFlight</CTAButton>}
-      </header>
+      </header>}
 
       {children}
 

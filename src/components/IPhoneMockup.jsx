@@ -80,7 +80,12 @@ export default function IPhoneMockup({ title = "Evenly", variant = "ledger" }) {
         <div className="iphone-screen">
           <div className="mock-status-bar">
             <span>9:41</span>
-            <span>{title}</span>
+            <span>5G</span>
+          </div>
+
+          <div className="mock-topbar">
+            <strong>{title}</strong>
+            <span>{variant === "settlement" ? "Settlement" : "Shared ledger"}</span>
           </div>
 
           {variant === "settlement" ? <SettlementContent /> : <LedgerContent />}

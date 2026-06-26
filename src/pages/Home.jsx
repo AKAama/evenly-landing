@@ -1,94 +1,181 @@
 import {
-  CheckCircle2,
-  CircleDollarSign,
+  AppWindow,
+  Bell,
+  CreditCard,
+  QrCode,
+  ReceiptText,
   Sparkles,
   UsersRound,
 } from "lucide-react";
+import appIcon from "../assets/evenly/app-icon.png";
+import ledgerDetailImage from "../assets/evenly/ledger-detail.png";
+import ledgerListImage from "../assets/evenly/ledger-list.png";
+import loginImage from "../assets/evenly/login.png";
+import newLedgerImage from "../assets/evenly/new-ledger.png";
 import CTAButton from "../components/CTAButton";
-import IPhoneMockup from "../components/IPhoneMockup";
 import Layout from "../components/Layout";
-import { faqs, features, useCases } from "../content";
+import { faqs, features, testimonials, useCases } from "../content";
 
-const featureIcons = [UsersRound, CheckCircle2, CircleDollarSign, Sparkles];
+const featureIcons = [UsersRound, ReceiptText, CreditCard, Sparkles];
+const showcaseScreens = [
+  { src: newLedgerImage, alt: "Evenly 新建账单界面", className: "screen-shot-side" },
+  { src: ledgerListImage, alt: "Evenly 账本列表界面", className: "screen-shot-main" },
+  { src: ledgerDetailImage, alt: "Evenly 账单明细与结算界面", className: "screen-shot-side" },
+];
 
 export default function Home() {
   return (
-    <Layout>
-      <main>
-        <section className="hero-section" aria-labelledby="home-hero-title">
+    <Layout minimal>
+      <main className="home-page">
+        <section className="lumnea-hero" aria-labelledby="home-hero-title">
+          <div className="app-identity" aria-label="Evenly">
+            <img className="app-icon" src={appIcon} alt="" />
+            <p>Evenly</p>
+          </div>
+
           <div className="hero-copy">
-            <p className="eyebrow">Shared ledger for friends</p>
-            <h1 id="home-hero-title">把共同消费变成一本清楚的账</h1>
+            <h1 id="home-hero-title">
+              Turn shared spending into
+              <br />
+              bite-sized clarity.
+            </h1>
             <p className="hero-lede">
-              Evenly 帮朋友、室友和旅行搭子记录每一笔共同开销，让谁垫付、
-              谁参与、最后怎么结清，都不用再靠群聊翻记录。
+              把聚餐、旅行、合租和日常代买整理成清楚的共享账本。
+              谁垫付、谁参与、怎么结清，几分钟内就能对齐。
             </p>
-            <div className="hero-actions">
-              <CTAButton />
-              <a className="privacy-link" href="/privacy">
-                查看隐私政策
+            <div className="hero-actions" aria-label="下载 Evenly">
+              <span className="spark-lines spark-lines-left" aria-hidden="true" />
+              <CTAButton>App Store</CTAButton>
+              <a className="qr-button" href="/download" aria-label="打开下载二维码">
+                <QrCode size={34} strokeWidth={2.6} />
               </a>
+              <span className="spark-lines spark-lines-right" aria-hidden="true" />
             </div>
           </div>
 
-          <div className="hero-visual" aria-label="Evenly 应用预览">
-            <IPhoneMockup title="账本" />
-            <IPhoneMockup title="结清" variant="settlement" />
-          </div>
-        </section>
-
-        <section className="section use-cases-section" aria-labelledby="use-cases-title">
-          <div className="section-heading">
-            <p className="eyebrow">Use cases</p>
-            <h2 id="use-cases-title">适合每一种共同消费</h2>
-          </div>
-          <div className="use-case-grid">
-            {useCases.map((item) => (
-              <article className="use-case-card" key={item.title}>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
+          <div className="hero-media app-showcase" aria-label="Evenly 应用界面预览">
+            {showcaseScreens.map((screen) => (
+              <div className={`device-shot ${screen.className}`} key={screen.src}>
+                <img src={screen.src} alt={screen.alt} />
+              </div>
             ))}
+            <div className="floating-composer" aria-label="输入消费事项预览">
+              <div className="composer-tabs">
+                <span>
+                  <ReceiptText size={15} /> Ledger
+                </span>
+                <span>
+                  <UsersRound size={15} /> Split
+                </span>
+              </div>
+              <p>Enter any shared expense...</p>
+            </div>
           </div>
         </section>
 
-        <section className="section features-section" aria-labelledby="features-title">
-          <div className="section-heading">
-            <p className="eyebrow">Features</p>
-            <h2 id="features-title">从记录到结清，都清楚一点</h2>
+        <section className="split-explainer" aria-labelledby="split-explainer-title">
+          <h2 id="split-explainer-title" className="sr-only">
+            Evenly 核心方式
+          </h2>
+          {useCases.slice(0, 2).map((item, index) => (
+            <article className="explainer-item" key={item.title}>
+              <div className="explainer-arrow" aria-hidden="true" />
+              <div className="mini-icon">{index === 0 ? <ReceiptText size={18} /> : <CreditCard size={18} />}</div>
+              <p className="eyebrow">{item.title}</p>
+              <h3>{item.body}</h3>
+              <div className="single-device-shot">
+                <img
+                  src={index === 0 ? ledgerListImage : ledgerDetailImage}
+                  alt={index === 0 ? "Evenly 账本列表截图" : "Evenly 结算明细截图"}
+                />
+              </div>
+            </article>
+          ))}
+        </section>
+
+        <section className="habit-section" aria-labelledby="habit-title">
+          <div className="habit-panel">
+            <div className="habit-meter">
+              <span>28 days</span>
+              <div aria-hidden="true">
+                {Array.from({ length: 28 }, (_, index) => (
+                  <i key={index} />
+                ))}
+              </div>
+            </div>
+            <div className="habit-copy">
+              <p className="eyebrow">Shared rhythm</p>
+              <h2 id="habit-title">Build a calmer money habit</h2>
+              <p>
+                每次共同消费都及时记录，成员确认后再结算。账目越完整，
+                关系里的尴尬就越少。
+              </p>
+            </div>
           </div>
-          <div className="feature-grid">
+          <div className="login-preview">
+            <img src={loginImage} alt="Evenly 登录界面截图" />
+          </div>
+        </section>
+
+        <section className="feature-stack" aria-labelledby="features-title">
+          <div className="section-heading">
+            <p className="eyebrow">Everything stays clear</p>
+            <h2 id="features-title">记录、确认、分摊、结清。</h2>
+          </div>
+          <div className="feature-list">
             {features.map((item, index) => {
               const Icon = featureIcons[index % featureIcons.length];
 
               return (
-                <article className="feature-card" key={item.title}>
+                <article className="feature-row" key={item.title}>
                   <div className="feature-icon" aria-hidden="true">
-                    <Icon size={22} strokeWidth={2.2} />
+                    <Icon size={22} strokeWidth={2.1} />
                   </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </div>
                 </article>
               );
             })}
           </div>
         </section>
 
-        <section className="story-section" aria-label="Evenly 使用故事">
-          <div className="story-card">
-            <p className="eyebrow">A shared story</p>
-            <h2>少一点反复确认，多一点共同默契</h2>
+        <section className="nudge-section" aria-labelledby="nudge-title">
+          <div>
+            <div className="mini-icon">
+              <Bell size={18} />
+            </div>
+            <h2 id="nudge-title">A gentle settlement nudge</h2>
             <p>
-              Stella、Tristan、Sylvia 周末一起去露营。Stella 先付了营地费，
-              Tristan 买了早餐和咖啡，Sylvia 负责车费。Evenly 把这些开销放在同一本账里，
-              每个人确认后就能看到自己该付多少。
+              活动结束、账目变动、有人确认时，Evenly 用轻量提醒帮大家完成最后一步。
             </p>
+          </div>
+          <div className="nudge-card" aria-hidden="true">
+            <AppWindow size={20} />
+            <span>Today's books are ready</span>
+            <strong>Pick one ledger and settle in under 3 minutes.</strong>
           </div>
         </section>
 
-        <section className="section faq-section" aria-labelledby="faq-title">
-          <div className="section-heading">
-            <p className="eyebrow">FAQ</p>
+        <section className="testimonial-section" aria-labelledby="testimonials-title">
+          <h2 id="testimonials-title" className="sr-only">
+            用户评价
+          </h2>
+          {testimonials.map((item) => (
+            <figure className="testimonial-card" key={item.name}>
+              <blockquote>"{item.quote}"</blockquote>
+              <figcaption>
+                <strong>{item.name}</strong>
+                <span>{item.role}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </section>
+
+        <section className="faq-section" aria-labelledby="faq-title">
+          <div className="section-heading compact">
+            <p className="eyebrow">More about Evenly</p>
             <h2 id="faq-title">常见问题</h2>
           </div>
           <div className="faq-list">
