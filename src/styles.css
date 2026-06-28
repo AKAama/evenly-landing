@@ -88,15 +88,11 @@ figure {
 }
 
 .brand-mark {
-  display: inline-grid;
-  place-items: center;
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
-  background: #0a84ff;
-  color: #fff;
-  box-shadow: 0 10px 24px rgba(35, 135, 244, 0.18);
+  border-radius: 9px;
+  box-shadow: 0 8px 18px rgba(28, 64, 122, 0.18);
+  object-fit: cover;
 }
 
 .site-nav,
@@ -256,7 +252,7 @@ figure {
   width: 78px;
   height: 78px;
   border-radius: 19px;
-  box-shadow: 0 16px 34px rgba(255, 92, 0, 0.2);
+  box-shadow: 0 16px 34px rgba(28, 64, 122, 0.22);
   object-fit: cover;
 }
 

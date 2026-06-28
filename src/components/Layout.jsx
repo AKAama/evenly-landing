@@ -1,13 +1,14 @@
 import { siteConfig } from "../config";
 import { navLinks } from "../content";
 import CTAButton from "./CTAButton";
+import appIcon from "../assets/evenly/app-icon.png";
 
 export default function Layout({ children, compact = false, minimal = false }) {
   return (
     <div className={`site-shell ${minimal ? "site-shell-minimal" : ""}`.trim()}>
       {!minimal && <header className="site-header">
         <a className="brand" href="/" aria-label="Evenly 首页">
-          <span className="brand-mark">=</span>
+          <img className="brand-mark" src={appIcon} alt="" />
           <span>Evenly</span>
         </a>
         <nav className="site-nav" aria-label="主导航">
@@ -25,7 +26,7 @@ export default function Layout({ children, compact = false, minimal = false }) {
       <footer className="site-footer">
         <div className="footer-brand-block">
           <a className="brand footer-brand" href="/" aria-label="Evenly 首页">
-            <span className="brand-mark">=</span>
+            <img className="brand-mark" src={appIcon} alt="" />
             <span>Evenly</span>
           </a>
           <p>把共同消费变成一本清楚的账。</p>
