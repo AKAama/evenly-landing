@@ -1242,3 +1242,150 @@ figure {
     min-height: 518px;
   }
 }
+
+/* ===== Thanks page ===== */
+.thanks-page {
+  width: min(820px, calc(100% - 40px));
+  max-width: 820px;
+  min-height: 48vh;
+  margin: 0 auto;
+  padding: 64px 0 96px;
+}
+
+.thanks-page .section-kicker {
+  margin: 0 0 16px;
+  color: #ff5a8a;
+  font-size: 0.78rem;
+  font-weight: 850;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.thanks-page h1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: #050505;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 850;
+  line-height: 1.06;
+}
+
+.thanks-heart {
+  color: #ff5a8a;
+  fill: rgba(255, 90, 138, 0.18);
+}
+
+.thanks-lede {
+  margin: 18px 0 36px;
+  color: #68635b;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.thanks-opening,
+.thanks-closing {
+  color: #57524c;
+  font-size: 1.02rem;
+  line-height: 1.95;
+}
+
+.thanks-opening p + p,
+.thanks-closing p + p,
+.thanks-words p + p {
+  margin-top: 12px;
+}
+
+.thanks-opening {
+  margin-bottom: 36px;
+  padding: 24px 28px;
+  border-left: 3px solid #ff5a8a;
+  background: rgba(255, 90, 138, 0.05);
+  border-radius: 14px;
+}
+
+.thanks-closing {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px dashed #e2ddd4;
+}
+
+.thanks-list {
+  display: grid;
+  gap: 18px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.thanks-card {
+  padding: 28px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.78);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.thanks-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 90, 138, 0.1);
+}
+
+.thanks-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.thanks-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff9bb8, #ff5a8a);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.thanks-card-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #050505;
+}
+
+.thanks-role {
+  margin: 4px 0 0;
+  font-size: 0.84rem;
+  color: #0a84ff;
+}
+
+.thanks-words {
+  margin-top: 16px;
+  color: #57524c;
+  line-height: 1.9;
+}
+
+.thanks-empty {
+  margin-top: 28px;
+  padding: 28px;
+  border: 1px dashed #d8d3c9;
+  border-radius: 20px;
+  background: #faf8f3;
+  color: #68635b;
+  line-height: 1.85;
+}
+
+.thanks-empty code {
+  padding: 1px 6px;
+  background: #fff;
+  border: 1px solid #e2ddd4;
+  border-radius: 6px;
+  font-size: 0.88em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}

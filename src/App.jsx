@@ -4,6 +4,7 @@ import Privacy from "./pages/Privacy";
 import Support from "./pages/Support";
 import Terms from "./pages/Terms";
 import Changelog from "./pages/Changelog";
+import Thanks from "./pages/Thanks";
 
 const routes = {
   "/": Home,
@@ -12,6 +13,7 @@ const routes = {
   "/support": Support,
   "/download": Download,
   "/changelog": Changelog,
+  "/thanks": Thanks,
 };
 
 function normalizePath(pathname) {

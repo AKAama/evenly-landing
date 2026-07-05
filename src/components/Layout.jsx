@@ -32,6 +32,7 @@ export default function Layout({ children, compact = false, minimal = false }) {
           <p>把共同消费变成一本清楚的账。</p>
         </div>
         <nav className="footer-links" aria-label="页脚导航">
+          <a href="/thanks">致谢</a>
           <a href="/privacy">隐私政策</a>
           <a href="/terms">服务条款</a>
           <a href="/support">支持</a>
