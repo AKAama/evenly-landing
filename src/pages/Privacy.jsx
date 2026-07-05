@@ -11,8 +11,9 @@ export default function Privacy() {
         <section className="policy-section">
           <h2>我们收集的数据</h2>
           <p>
-            Evenly 开发者 / 我们会在你使用 App 时收集为了提供共同消费记录和分账功能所必需的信息，
-            包括你主动填写的账目、成员名称、消费备注、登录邮箱、设备与崩溃诊断信息。
+            登录使用云端协作功能时，Evenly 会处理提供共同消费记录和分账功能所必需的信息，
+            包括你主动填写的账目、成员名称、消费备注和登录邮箱。无需登录的本地模式不会上传账本数据，
+            相关内容仅保存在用户当前设备上。
           </p>
         </section>
 
@@ -44,9 +45,10 @@ export default function Privacy() {
         <section className="policy-section">
           <h2>账号与数据删除</h2>
           <p>
-            用户可以发送邮件至{" "}
-            <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>{" "}
-            请求删除账号及相关数据；我们会在合理时间内处理该请求，并在需要时要求验证身份。
+            已登录用户可以在 App 内前往“设置 → 账户 → 删除账户”，直接永久删除账号及相关数据。
+            删除后无法恢复。无需登录的本地账本可由用户直接在设备上的本地模式中删除。
+            如有疑问，也可以发送邮件至{" "}
+            <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>。
           </p>
         </section>
 
