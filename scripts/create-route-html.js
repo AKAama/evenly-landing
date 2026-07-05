@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = join(__dirname, "..");
 const distDir = join(projectRoot, "dist");
 const indexFile = join(distDir, "index.html");
-const routes = ["privacy", "terms", "support", "download"];
+const routes = ["privacy", "terms", "support", "download", "changelog"];
 
 await Promise.all(
   routes.map(async (route) => {

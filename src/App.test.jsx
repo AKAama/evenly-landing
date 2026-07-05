@@ -85,6 +85,14 @@ test("renders the download route", () => {
   ).toBe(true);
 });
 
+test("renders the changelog route", () => {
+  renderPath("/changelog");
+
+  expect(screen.getByRole("heading", { name: "更新日志" })).toBeInTheDocument();
+  expect(screen.getByText("协作与账户体验更新")).toBeInTheDocument();
+  expect(screen.getByText(/支持使用用户名或邮箱登录/)).toBeInTheDocument();
+});
+
 describe("download CTA", () => {
   it("shows App Store wording on the homepage", () => {
     renderPath("/");

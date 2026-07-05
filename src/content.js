@@ -1,9 +1,43 @@
 import { siteConfig } from "./config";
 
 export const navLinks = [
+  { href: "/changelog", label: "更新日志" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
   { href: "/support", label: "Support" },
+];
+
+export const changelogEntries = [
+  {
+    date: "2026 年 7 月 5 日",
+    title: "协作与账户体验更新",
+    items: [
+      "新增唯一用户名，支持使用用户名或邮箱登录。",
+      "新增账本邀请流程，被邀请者接受后才会正式加入。",
+      "收紧账本、成员和账单删除权限，普通成员可安全退出账本。",
+      "账单创建者无需重复确认，并精简待结算与历史结算展示。",
+      "新增本地使用模式、成员头像、账单范围筛选及多处界面优化。",
+    ],
+  },
+  {
+    date: "2026 年 6 月 28 日",
+    title: "共享账本稳定性更新",
+    items: [
+      "支持临时成员参与账单分摊。",
+      "优化付款人和成员身份匹配，修复部分账单无法创建的问题。",
+      "完善头像上传、显示与失败提示。",
+      "优化结算方案展示及账本成员刷新。",
+    ],
+  },
+  {
+    date: "2026 年 6 月 14 日",
+    title: "Evenly 初始版本",
+    items: [
+      "支持创建共享账本、添加成员和记录多人账单。",
+      "支持成员确认、自动分摊和结算建议。",
+      "支持账户注册、登录和个人资料管理。",
+    ],
+  },
 ];
 
 export const useCases = [

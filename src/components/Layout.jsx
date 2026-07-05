@@ -36,6 +36,7 @@ export default function Layout({ children, compact = false, minimal = false }) {
           <a href="/terms">服务条款</a>
           <a href="/support">支持</a>
           <a href="/download">下载</a>
+          <a href="/changelog">更新日志</a>
           <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>
         </nav>
       </footer>
