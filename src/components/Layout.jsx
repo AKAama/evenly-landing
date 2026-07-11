@@ -1,25 +1,39 @@
 import { siteConfig } from "../config";
 import { navLinks } from "../content";
-import CTAButton from "./CTAButton";
 import appIcon from "../assets/evenly/app-icon.png";
 
 export default function Layout({ children, compact = false, minimal = false }) {
+  const headerLinks = minimal
+    ? [
+        { href: "#features-title", label: "功能" },
+        { href: "#faq-title", label: "常见问题" },
+      ]
+    : navLinks;
+
   return (
     <div className={`site-shell ${minimal ? "site-shell-minimal" : ""}`.trim()}>
-      {!minimal && <header className="site-header">
+      <header className={`site-header ${minimal ? "site-header-home" : ""}`.trim()}>
         <a className="brand" href="/" aria-label="Evenly 首页">
           <img className="brand-mark" src={appIcon} alt="" />
           <span>Evenly</span>
         </a>
         <nav className="site-nav" aria-label="主导航">
-          {navLinks.map((link) => (
+          {headerLinks.map((link) => (
             <a key={link.href} href={link.href}>
               {link.label}
             </a>
           ))}
         </nav>
-        {!compact && <CTAButton className="header-cta">TestFlight</CTAButton>}
-      </header>}
+        {!compact && !minimal && (
+          <a
+            className="header-download"
+            href={siteConfig.appStoreUrl}
+            aria-label="在 App Store 下载 Evenly"
+          >
+            下载
+          </a>
+        )}
+      </header>
 
       {children}
 

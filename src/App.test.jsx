@@ -18,6 +18,15 @@ afterEach(() => {
 test("renders the home route", () => {
   renderPath("/");
 
+  expect(screen.getByRole("navigation", { name: "主导航" })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "功能" })).toHaveAttribute("href", "#features-title");
+  expect(screen.getByRole("link", { name: "常见问题" })).toHaveAttribute("href", "#faq-title");
+  expect(screen.queryByRole("link", { name: "在 App Store 下载 Evenly" })).not.toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "显示 App Store 下载二维码" })).toHaveAttribute(
+    "href",
+    "https://apps.apple.com/cn/app/evenly/id6784235151"
+  );
+  expect(screen.getByRole("img", { name: "Evenly App Store 下载二维码" })).toBeInTheDocument();
   expect(
     screen.getByRole("heading", {
       name: "Turn shared spending intobite-sized clarity.",
@@ -75,14 +84,16 @@ test("renders the download route", () => {
   renderPath("/download");
 
   expect(
-    screen.getByRole("heading", { name: "抢先体验 Evenly" })
+    screen.getByRole("heading", { name: "下载 Evenly" })
   ).toBeInTheDocument();
-  expect(screen.getByText(/TestFlight 邀请链接正在准备中/)).toBeInTheDocument();
-  expect(
-    screen.getAllByRole("link", { name: "isyehui@gmail.com" }).some(
-      (link) => link.getAttribute("href") === supportEmailHref
-    )
-  ).toBe(true);
+  expect(screen.getByRole("link", { name: "Download on the App Store" })).toHaveAttribute(
+    "href",
+    "https://apps.apple.com/cn/app/evenly/id6784235151"
+  );
+  expect(screen.getByRole("link", { name: "打开 TestFlight 邀请" })).toHaveAttribute(
+    "href",
+    "https://testflight.apple.com/join/vwJgZ9gF"
+  );
 });
 
 test("renders the changelog route", () => {
@@ -96,9 +107,14 @@ test("renders the changelog route", () => {
 describe("download CTA", () => {
   it("shows App Store wording on the homepage", () => {
     renderPath("/");
-    const link = screen.getByRole("link", { name: "Download on the App Store" });
+    const links = screen.getAllByRole("link", { name: "Download on the App Store" });
 
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute("href", "/download");
+    expect(links).toHaveLength(1);
+    links.forEach((link) => {
+      expect(link).toHaveAttribute(
+        "href",
+        "https://apps.apple.com/cn/app/evenly/id6784235151"
+      );
+    });
   });
 });

@@ -85,7 +85,7 @@ export const faqs = [
   },
   {
     question: "现在可以在哪里下载或测试？",
-    answer: "Evenly 目前处于早期阶段，下载和测试入口会在页面中更新。",
+    answer: "Evenly 已在 App Store 上架；如果想提前体验后续更新，也可以加入 TestFlight。",
   },
   {
     question: "我的账本数据会同步吗？",
@@ -96,8 +96,8 @@ export const faqs = [
     answer: `你可以发送邮件到 ${siteConfig.supportEmail} 反馈问题、建议或测试体验。`,
   },
   {
-    question: "之后会上架 App Store 吗？",
-    answer: "计划会在准备就绪后上架 App Store，具体时间会根据测试反馈和审核进度更新。",
+    question: "TestFlight 和 App Store 有什么区别？",
+    answer: "App Store 提供稳定版本，TestFlight 会用于提前发布和测试后续更新。",
   },
 ];
 

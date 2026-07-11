@@ -1,4 +1,4 @@
-import { getPrimaryDownloadUrl } from "../config";
+import { siteConfig } from "../config";
 import appStoreButton from "../assets/lumnea-reference/app-store-button.svg";
 
 export default function CTAButton({
@@ -7,12 +7,15 @@ export default function CTAButton({
 }) {
   const label = children === "App Store" ? "Download on the App Store" : String(children);
   const isAppStoreButton = children === "App Store";
+  const href = isAppStoreButton
+    ? siteConfig.appStoreUrl || "/download"
+    : siteConfig.testFlightUrl || "/download";
 
   return (
     <a
       aria-label={label}
       className={`cta-button ${isAppStoreButton ? "cta-button-image" : ""} ${className}`.trim()}
-      href={getPrimaryDownloadUrl()}
+      href={href}
     >
       {isAppStoreButton ? (
         <img src={appStoreButton} alt="" />

@@ -11,10 +11,10 @@ export default function Support() {
         <section className="policy-section">
           <h2>联系我们</h2>
           <p>
-            使用 Evenly 时遇到问题、想反馈体验或希望加入测试名单，都可以发送邮件至{" "}
+            使用 Evenly 时遇到问题或想反馈体验，都可以发送邮件至{" "}
             <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>。
           </p>
-          <p>Evenly 目前处于 beta / TestFlight 测试阶段，功能和体验仍会持续调整。</p>
+          <p>Evenly 已在 App Store 上架，后续更新仍会通过 TestFlight 提前开放测试。</p>
         </section>
 
         <section className="policy-section">

@@ -77,6 +77,46 @@ figure {
   padding: 18px 0;
 }
 
+.site-header-home {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 50%;
+  min-height: 74px;
+  margin: 0;
+  padding: 24px 0 0;
+  background: transparent;
+  transform: translateX(-50%);
+}
+
+.site-header-home .brand {
+  position: absolute;
+  left: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.site-header-home .brand-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.site-header-home .site-nav {
+  position: absolute;
+  left: 50%;
+  gap: 4px;
+  color: rgba(28, 27, 25, 0.68);
+  font-size: 0.92rem;
+  font-weight: 450;
+  transform: translateX(-50%);
+}
+
+.site-header-home .site-nav a {
+  padding: 7px 22px;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -113,6 +153,26 @@ figure {
 .site-nav a:hover,
 .footer-links a:hover {
   color: #050505;
+}
+
+.header-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 82px;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: #111;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 750;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.header-download:hover {
+  background: #2a2927;
+  transform: translateY(-1px);
 }
 
 .cta-button {
@@ -236,7 +296,7 @@ figure {
   gap: 46px;
   width: min(100%, 1280px);
   margin: 0 auto;
-  padding: 60px 20px 0;
+  padding: 124px 20px 0;
   text-align: center;
 }
 
@@ -286,6 +346,10 @@ figure {
   margin-top: 6px;
 }
 
+.qr-download {
+  position: relative;
+}
+
 .qr-button {
   display: inline-grid;
   place-items: center;
@@ -300,6 +364,52 @@ figure {
 .qr-button:hover {
   transform: translateY(-2px);
   background: #1d1d1d;
+}
+
+.qr-popover {
+  position: absolute;
+  z-index: 10;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  display: grid;
+  width: 196px;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(5, 5, 5, 0.1);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(25, 20, 12, 0.18);
+  color: #302d28;
+  font-size: 0.82rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.qr-popover::after {
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-right: 1px solid rgba(5, 5, 5, 0.1);
+  border-bottom: 1px solid rgba(5, 5, 5, 0.1);
+  background: #fff;
+  content: "";
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.qr-popover img {
+  display: block;
+  width: 166px;
+  height: 166px;
+}
+
+.qr-download:hover .qr-popover,
+.qr-download:focus-within .qr-popover {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .spark-lines {
@@ -1044,6 +1154,27 @@ figure {
     padding-top: 16px;
   }
 
+  .site-header-home {
+    flex-wrap: nowrap;
+    width: calc(100% - 32px);
+    min-height: 66px;
+    padding: 18px 0 0;
+  }
+
+  .site-header-home .site-nav {
+    position: static;
+    order: initial;
+    width: auto;
+    margin-left: auto;
+    padding: 0;
+    overflow: visible;
+    transform: none;
+  }
+
+  .site-header-home .site-nav a {
+    padding: 7px 10px;
+  }
+
   .site-nav {
     order: 3;
     width: 100%;
@@ -1055,7 +1186,7 @@ figure {
 
   .lumnea-hero {
     gap: 30px;
-    padding: 30px 0 0;
+    padding: 100px 0 0;
   }
 
   .hero-copy {
@@ -1076,7 +1207,7 @@ figure {
   }
 
   .spark-lines,
-  .qr-button {
+  .qr-download {
     display: none;
   }
 

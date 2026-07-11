@@ -8,12 +8,14 @@ import {
   UsersRound,
 } from "lucide-react";
 import appIcon from "../assets/evenly/app-icon.png";
+import appStoreQr from "../assets/evenly/app-store-qr.svg";
 import ledgerDetailImage from "../assets/evenly/ledger-detail.png";
 import ledgerListImage from "../assets/evenly/ledger-list.png";
 import loginImage from "../assets/evenly/login.png";
 import newLedgerImage from "../assets/evenly/new-ledger.png";
 import CTAButton from "../components/CTAButton";
 import Layout from "../components/Layout";
+import { siteConfig } from "../config";
 import { faqs, features, testimonials, useCases } from "../content";
 
 const featureIcons = [UsersRound, ReceiptText, CreditCard, Sparkles];
@@ -46,9 +48,19 @@ export default function Home() {
             <div className="hero-actions" aria-label="下载 Evenly">
               <span className="spark-lines spark-lines-left" aria-hidden="true" />
               <CTAButton>App Store</CTAButton>
-              <a className="qr-button" href="/download" aria-label="打开下载二维码">
-                <QrCode size={34} strokeWidth={2.6} />
-              </a>
+              <div className="qr-download">
+                <a
+                  className="qr-button"
+                  href={siteConfig.appStoreUrl}
+                  aria-label="显示 App Store 下载二维码"
+                >
+                  <QrCode size={34} strokeWidth={2.6} />
+                </a>
+                <div className="qr-popover">
+                  <img src={appStoreQr} alt="Evenly App Store 下载二维码" />
+                  <strong>扫码在 App Store 下载</strong>
+                </div>
+              </div>
               <span className="spark-lines spark-lines-right" aria-hidden="true" />
             </div>
           </div>
