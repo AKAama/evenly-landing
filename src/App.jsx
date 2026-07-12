@@ -1,5 +1,6 @@
 import Download from "./pages/Download";
 import Home from "./pages/Home";
+import Join from "./pages/Join";
 import Privacy from "./pages/Privacy";
 import Support from "./pages/Support";
 import Terms from "./pages/Terms";
@@ -24,9 +25,19 @@ function normalizePath(pathname) {
   return pathname || "/";
 }
 
+function matchJoinToken(pathname) {
+  const match = pathname.match(/^\/join\/([^/]+)$/);
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
 export default function App() {
   const pathname = normalizePath(window.location.pathname);
-  const Page = routes[pathname] || Home;
+  const joinToken = matchJoinToken(pathname);
 
+  if (joinToken) {
+    return <Join token={joinToken} />;
+  }
+
+  const Page = routes[pathname] || Home;
   return <Page />;
 }

@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "KN6BTC248F.com.yhma.Evenly"
+        ],
+        "components": [
+          {
+            "/": "/join/*",
+            "comment": "Ledger QR / Universal Link invites open Evenly directly when installed"
+          }
+        ]
+      }
+    ]
+  }
+}
