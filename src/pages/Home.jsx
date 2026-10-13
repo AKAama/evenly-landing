@@ -3,6 +3,7 @@ import {
   CheckCircle2,
   CreditCard,
   ReceiptText,
+  Play,
   ShieldCheck,
   Sparkles,
   UsersRound,
@@ -16,7 +17,7 @@ import promoTeam from "../assets/evenly/promo-team.png";
 import CTAButton from "../components/CTAButton";
 import Layout from "../components/Layout";
 import { siteConfig } from "../config";
-import { faqs, features, testimonials } from "../content";
+import { changelogEntries, faqs, features, testimonials } from "../content";
 
 const featureIcons = [UsersRound, ReceiptText, CreditCard, Sparkles];
 
@@ -69,7 +70,7 @@ export default function Home() {
           <div className="wizz-hero-inner">
             <a className="news-pill" href="/changelog">
               <span className="news-pill-tag">更新</span>
-              <span className="news-pill-text">协作与账户体验更新</span>
+              <span className="news-pill-text">{changelogEntries[0].title}</span>
               <span className="news-pill-arrow" aria-hidden="true">
                 →
               </span>
@@ -93,6 +94,10 @@ export default function Home() {
               </a>
             </div>
 
+            <a className="promo-watch-link" href="#promo-video">
+              <Play size={16} aria-hidden="true" /> 观看 50 秒介绍
+            </a>
+
             <ul className="trust-row" aria-label="产品亮点">
               {trustItems.map((item) => {
                 const Icon = item.icon;
@@ -114,6 +119,27 @@ export default function Home() {
           <div className="hero-promo-band" aria-label="Evenly 应用界面预览">
             <img className="hero-promo-shot" src={promoHero} alt="Evenly 选择付款与参与人" />
           </div>
+        </section>
+
+        <section className="promo-video-section" id="promo-video" aria-labelledby="promo-video-title">
+          <div className="section-heading center">
+            <p className="eyebrow">一起出发</p>
+            <h2 id="promo-video-title" className="display-title-sm">一起玩，别让分账扫兴。</h2>
+            <p className="promo-video-lede">用 50 秒，看一趟旅行的共同开销如何从记账到结清。</p>
+          </div>
+          <video
+            className="promo-video-player"
+            controls
+            playsInline
+            preload="none"
+            poster="/media/evenly-promo-poster.jpg"
+            aria-label="Evenly 旅行分账宣传片，约 50 秒"
+          >
+            <source src="/media/evenly-promo.mp4" type="video/mp4" />
+            <track kind="captions" src="/media/evenly-promo.zh-CN.vtt" srcLang="zh-CN" label="中文" />
+            你的浏览器暂不支持视频播放，<a href="/media/evenly-promo.mp4">下载宣传片观看</a>。
+          </video>
+          <p className="promo-video-note">建议开启声音观看 · 画面使用虚构演示账目</p>
         </section>
 
         <section className="mission-section" id="mission" aria-labelledby="mission-title">

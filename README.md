@@ -41,3 +41,14 @@ so those public links work on plain static hosting without relying on a platform
 - `/terms`
 - `/support`
 - `/download`
+
+## Homepage Promo Video
+
+The homepage includes a click-to-play 50-second product film below the hero.
+Assets in `public/media/` are copied into `dist/media/` during the normal build:
+
+- `evenly-promo.mp4`: 1080p30 H.264/AAC, approximately 5 MB, fast-start enabled.
+- `evenly-promo-poster.jpg`: lightweight poster.
+- `evenly-promo.zh-CN.vtt`: optional Chinese captions.
+
+The video uses native playback controls, inline mobile playback, and `preload="none"` to avoid fetching the film on initial page load. Deploy the entire `dist` directory as usual. The original 4K master is kept outside this repository in the workspace's 宣传片 directory.

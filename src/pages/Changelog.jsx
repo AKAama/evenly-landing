@@ -11,9 +11,9 @@ export default function Changelog() {
 
         <div className="changelog-list">
           {changelogEntries.map((entry) => (
-            <article className="changelog-entry" key={entry.date}>
+            <article className="changelog-entry" key={entry.id}>
               <time>{entry.date}</time>
-              <h2>{entry.title}</h2>
+              <h2>{entry.version && `${entry.version} · `}{entry.title}</h2>
               <ul>
                 {entry.items.map((item) => <li key={item}>{item}</li>)}
               </ul>
