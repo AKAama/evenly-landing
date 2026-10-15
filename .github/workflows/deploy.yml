@@ -1,0 +1,125 @@
+name: Landing CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Check deployment script
+        run: bash scripts/test-deploy-static.sh
+      - run: npm run build
+      - name: Record deployed commit
+        run: printf '%s\n' "$GITHUB_SHA" > dist/deploy-version.txt
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: landing-dist
+          path: dist/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: landing-production
+      cancel-in-progress: false
+    environment:
+      name: production
+      url: https://app.ismyh.cn
+    env:
+      DEPLOY_HOST: ${{ vars.DEPLOY_HOST || '47.96.83.175' }}
+      DEPLOY_PORT: ${{ vars.DEPLOY_PORT || '22' }}
+      DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/var/www/evenly-landing' }}
+      DEPLOY_URL: ${{ vars.DEPLOY_URL || 'https://app.ismyh.cn' }}
+      STAGING_PATH: /tmp/evenly-landing-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - name: Check this is still the latest main commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          if [ "$latest" != "$GITHUB_SHA" ]; then
+            echo '::error::A newer main commit exists. Deploy the latest workflow run instead.'
+            exit 1
+          fi
+      - name: Check deployment credentials
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          if [ -z "$DEPLOY_USER" ] || { [ -z "$DEPLOY_PASSWORD" ] && [ -z "$DEPLOY_SSH_KEY" ]; }; then
+            echo '::error::Configure DEPLOY_USER and either DEPLOY_PASSWORD or DEPLOY_SSH_KEY in repository Actions secrets.'
+            exit 1
+          fi
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: landing-dist
+          path: dist/
+      - name: Upload complete build to staging
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ env.DEPLOY_HOST }}
+          port: ${{ env.DEPLOY_PORT }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
+          source: dist,scripts/deploy-static.sh
+          target: ${{ env.STAGING_PATH }}
+      - name: Publish assets before HTML
+        uses: appleboy/ssh-action@v1.2.5
+        env:
+          LANDING_STAGING: ${{ env.STAGING_PATH }}
+          LANDING_TARGET: ${{ env.DEPLOY_PATH }}
+        with:
+          host: ${{ env.DEPLOY_HOST }}
+          port: ${{ env.DEPLOY_PORT }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
+          envs: LANDING_STAGING,LANDING_TARGET
+          script: |
+            set -eu
+            bash "$LANDING_STAGING/scripts/deploy-static.sh" "$LANDING_STAGING/dist" "$LANDING_TARGET"
+            rm -rf -- "$LANDING_STAGING"
+      - name: Verify published commit
+        run: |
+          for attempt in 1 2 3 4 5; do
+            deployed=$(curl --fail --silent --show-error --connect-timeout 10 --max-time 20 \
+              -H 'Cache-Control: no-cache' \
+              "${DEPLOY_URL%/}/deploy-version.txt?run=$GITHUB_RUN_ID&attempt=$attempt") || deployed=''
+            if [ "$deployed" = "$GITHUB_SHA" ]; then
+              echo "Published commit verified: $GITHUB_SHA"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo '::error::The website is not serving this commit. Check the Nginx root, domain, and cache settings.'
+          exit 1
